@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none">
+  <rect width="200" height="200" rx="16" fill="#f1f5f9"/>
+  <circle cx="100" cy="85" r="45" fill="#e2e8f0"/>
+  <text x="100" y="100" font-size="48" text-anchor="middle" dominant-baseline="middle">🍽️</text>
+  <text x="100" y="150" font-size="13" text-anchor="middle" fill="#94a3b8" font-family="sans-serif">Belum ada foto</text>
+</svg>
