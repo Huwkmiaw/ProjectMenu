@@ -11,6 +11,14 @@
       "dest": "/public/build/$1"
     },
     {
+      "src": "/favicon.ico",
+      "dest": "/public/favicon.ico"
+    },
+    {
+      "src": "/images/(.*)",
+      "dest": "/public/images/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/api/index.php"
     }
@@ -29,8 +37,6 @@
     "DB_PORT": "4000",
     "DB_DATABASE": "test",
     "DB_USERNAME": "3XEwmR5XCJCtCyk.root",
-    "DB_PASSWORD": "K0JXep8hB9kQNrlv",
-    "MYSQL_ATTR_SSL_CA": "true",
-    "MYSQL_ATTR_SSL_VERIFY_SERVER_CERT": "false"
+    "DB_PASSWORD": "K0JXep8hB9kQNrlv"
   }
 }
