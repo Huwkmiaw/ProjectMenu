@@ -24,6 +24,7 @@
     }
   ],
   "env": {
+    "APP_NAME": "MenuKasir",
     "APP_ENV": "production",
     "APP_DEBUG": "true",
     "APP_URL": "https://projectmenu-seven.vercel.app",
@@ -33,6 +34,8 @@
     "APP_STORAGE": "/tmp/storage",
     "VIEW_COMPILED_PATH": "/tmp/storage/framework/views",
     "SESSION_DRIVER": "database",
+    "SESSION_LIFETIME": "120",
+    "SESSION_COOKIE": "menukasir_session",
     "CACHE_STORE": "database",
     "DB_CONNECTION": "mysql",
     "DB_HOST": "gateway01.ap-southeast-1.prod.aws.tidbcloud.com",
