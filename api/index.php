@@ -4,6 +4,12 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
+// Force HTTPS in serverless environment
+$_SERVER['HTTPS'] = 'on';
+$_SERVER['SERVER_PORT'] = 443;
+$_SERVER['HTTP_X_FORWARDED_PROTO'] = 'https';
+$_SERVER['HTTP_X_FORWARDED_PORT'] = 443;
+
 // Prepare writable bootstrap cache directory in /tmp
 $bootstrapCache = '/tmp/bootstrap/cache';
 if (!is_dir($bootstrapCache)) {
