@@ -23,6 +23,14 @@
     "APP_STORAGE": "/tmp/storage",
     "VIEW_COMPILED_PATH": "/tmp/storage/framework/views",
     "SESSION_DRIVER": "file",
-    "CACHE_STORE": "file"
+    "CACHE_STORE": "file",
+    "DB_CONNECTION": "mysql",
+    "DB_HOST": "gateway01.ap-southeast-1.prod.aws.tidbcloud.com",
+    "DB_PORT": "4000",
+    "DB_DATABASE": "test",
+    "DB_USERNAME": "3XEwmR5XCJCtCyk.root",
+    "DB_PASSWORD": "K0JXep8hB9kQNrlv",
+    "MYSQL_ATTR_SSL_CA": "true",
+    "MYSQL_ATTR_SSL_VERIFY_SERVER_CERT": "false"
   }
 }
