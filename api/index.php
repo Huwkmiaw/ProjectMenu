@@ -10,12 +10,13 @@ if (!is_dir($bootstrapCache)) {
     mkdir($bootstrapCache, 0777, true);
 }
 
-if (file_exists(__DIR__ . '/../bootstrap/cache/packages.php')) {
-    @copy(__DIR__ . '/../bootstrap/cache/packages.php', $bootstrapCache . '/packages.php');
-}
-if (file_exists(__DIR__ . '/../bootstrap/cache/services.php')) {
-    @copy(__DIR__ . '/../bootstrap/cache/services.php', $bootstrapCache . '/services.php');
-}
+// Write production package manifest (excluding local dev packages)
+$packages = [
+    'nesbot/carbon' => [
+        'providers' => ['Carbon\\Laravel\\ServiceProvider'],
+    ],
+];
+file_put_contents($bootstrapCache . '/packages.php', '<?php return ' . var_export($packages, true) . ';');
 
 putenv("APP_SERVICES_CACHE={$bootstrapCache}/services.php");
 putenv("APP_PACKAGES_CACHE={$bootstrapCache}/packages.php");
