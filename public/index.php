@@ -17,4 +17,8 @@ require __DIR__.'/../vendor/autoload.php';
 /** @var Application $app */
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
+if (isset($_ENV['APP_STORAGE']) || getenv('APP_STORAGE')) {
+    $app->useStoragePath($_ENV['APP_STORAGE'] ?? getenv('APP_STORAGE'));
+}
+
 $app->handleRequest(Request::capture());
