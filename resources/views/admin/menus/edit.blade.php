@@ -46,24 +46,38 @@
                         <label for="is_available" class="form-label" style="margin-bottom:0; cursor:pointer">Tersedia untuk dipesan</label>
                     </div>
                     <div class="form-group" style="grid-column:1/-1">
-                        <label class="form-label">Foto Menu</label>
+                        <label class="form-label">Link / URL Foto Menu <span style="color:var(--primary); font-size:.78rem; font-weight:600">(Rekomendasi Hosting Cloud)</span></label>
+                        <input type="url" name="image_url" id="imageUrlInput" class="form-control @error('image_url') is-invalid @enderror"
+                               value="{{ old('image_url', Str::startsWith($menu->image, ['http://', 'https://', 'data:']) ? $menu->image : '') }}"
+                               placeholder="cth: https://images.unsplash.com/... atau https://i.postimg.cc/..."
+                               oninput="previewUrlImage(this.value)">
+                        <div style="font-size:.75rem; color:var(--muted); margin-top:4px">
+                            Tips: Anda bisa upload foto ke <a href="https://postimages.org" target="_blank" style="color:var(--primary)">Postimages.org</a> atau <a href="https://imgbb.com" target="_blank" style="color:var(--primary)">ImgBB</a> lalu paste <strong>Direct Link URL</strong> di sini.
+                        </div>
+                        @error('image_url')<span class="form-error">{{ $message }}</span>@enderror
+                    </div>
+
+                    <div class="form-group" style="grid-column:1/-1">
+                        <label class="form-label">Atau Upload File Gambar</label>
                         @if($menu->image)
                             <div style="margin-bottom:10px">
                                 <img src="{{ $menu->imageUrl }}" alt="{{ $menu->name }}"
-                                     style="max-width:160px; border-radius:10px; border:1px solid var(--border)">
+                                     style="max-width:160px; max-height:120px; object-fit:cover; border-radius:10px; border:1px solid var(--border)">
                                 <div style="font-size:.75rem; color:var(--muted); margin-top:4px">Foto saat ini</div>
                             </div>
                         @endif
-                        <input type="file" name="image" class="form-control" accept="image/*" onchange="previewImage(this)">
+                        <input type="file" name="image" id="imageInput" class="form-control @error('image') is-invalid @enderror" accept="image/*" onchange="previewImage(this)">
                         <div id="imagePreview" style="margin-top:12px; display:none">
-                            <img id="previewImg" src="" alt="Preview" style="max-width:160px; border-radius:10px; border:1px solid var(--border)">
+                            <div style="font-size:.75rem; color:var(--muted); margin-bottom:4px">Preview Foto Baru:</div>
+                            <img id="previewImg" src="" alt="Preview" style="max-width:160px; max-height:120px; object-fit:cover; border-radius:10px; border:1px solid var(--border)">
                         </div>
+                        @error('image')<span class="form-error">{{ $message }}</span>@enderror
                     </div>
                 </div>
                 @if($errors->any())
-                    <div class="alert alert-danger">{{ $errors->first() }}</div>
+                    <div class="alert alert-danger" style="margin-top:16px">{{ $errors->first() }}</div>
                 @endif
-                <button type="submit" class="btn btn-primary">Perbarui Menu</button>
+                <button type="submit" class="btn btn-primary" style="margin-top:16px">Perbarui Menu</button>
             </form>
         </div>
     </div>
@@ -79,5 +93,17 @@ function previewImage(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+function previewUrlImage(url) {
+    if (url && (url.startsWith('http://') || url.startsWith('https://') || url.startsWith('data:'))) {
+        document.getElementById('previewImg').src = url;
+        document.getElementById('imagePreview').style.display = 'block';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const val = document.getElementById('imageUrlInput')?.value;
+    if (val) previewUrlImage(val);
+});
 </script>
 @endsection

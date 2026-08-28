@@ -43,12 +43,15 @@ class MenuController extends Controller
             'price' => ['required', 'numeric', 'min:0'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
             'image' => ['nullable', 'image', 'max:2048'],
+            'image_url' => ['nullable', 'url', 'max:1000'],
         ]);
 
         $data['slug'] = Str::slug($data['name']);
         $data['is_available'] = $request->boolean('is_available', true);
 
-        if ($request->hasFile('image')) {
+        if ($request->filled('image_url')) {
+            $data['image'] = $request->input('image_url');
+        } elseif ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('menus', 'public');
         }
 
@@ -73,13 +76,19 @@ class MenuController extends Controller
             'price' => ['required', 'numeric', 'min:0'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
             'image' => ['nullable', 'image', 'max:2048'],
+            'image_url' => ['nullable', 'url', 'max:1000'],
         ]);
 
         $data['slug'] = Str::slug($data['name']);
         $data['is_available'] = $request->boolean('is_available');
 
-        if ($request->hasFile('image')) {
-            if ($menu->image) {
+        if ($request->filled('image_url')) {
+            if ($menu->image && !Str::startsWith($menu->image, ['http://', 'https://'])) {
+                Storage::disk('public')->delete($menu->image);
+            }
+            $data['image'] = $request->input('image_url');
+        } elseif ($request->hasFile('image')) {
+            if ($menu->image && !Str::startsWith($menu->image, ['http://', 'https://'])) {
                 Storage::disk('public')->delete($menu->image);
             }
             $data['image'] = $request->file('image')->store('menus', 'public');
