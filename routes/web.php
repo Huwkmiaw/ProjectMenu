@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
+Route::get('/storage/{path}', function (string $path) {
+    $filePath = storage_path('app/public/'.$path);
+    if (!file_exists($filePath)) {
+        abort(404);
+    }
+    return response()->file($filePath);
+})->where('path', '.*')->name('storage.local');
+
 Route::get('/', [MenuController::class, 'welcome'])->name('welcome');
 Route::post('/order-type', [MenuController::class, 'setOrderType'])->name('order-type.set');
 Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');

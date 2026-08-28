@@ -2,6 +2,7 @@
   "version": 2,
   "framework": null,
   "outputDirectory": "public",
+  "regions": ["sin1"],
   "functions": {
     "api/index.php": { "runtime": "vercel-php@0.7.3" }
   },
@@ -26,7 +27,7 @@
   "env": {
     "APP_NAME": "MenuKasir",
     "APP_ENV": "production",
-    "APP_DEBUG": "true",
+    "APP_DEBUG": "false",
     "APP_URL": "https://projectmenu-seven.vercel.app",
     "APP_KEY": "base64:mZW8LvAMd0FD87Asog62OJXjMWi8l8JOEnAuOdW4pZk=",
     "APP_MAINTENANCE_DRIVER": "file",

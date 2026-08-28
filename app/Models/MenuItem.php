@@ -49,7 +49,11 @@ class MenuItem extends Model
      */
     public function getImageUrlAttribute(): string
     {
-        if ($this->image && file_exists(storage_path('app/public/'.$this->image))) {
+        if (!empty($this->image)) {
+            if (Str::startsWith($this->image, ['http://', 'https://', 'data:'])) {
+                return $this->image;
+            }
+
             return asset('storage/'.$this->image);
         }
 
